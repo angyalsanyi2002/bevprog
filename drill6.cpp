@@ -1,26 +1,22 @@
-//
+ //
 // This is example code from Chapter 6.7 "Trying the second version" of
 // "Software - Principles and Practice using C++" by Bjarne Stroustrup
 //
 
 /*
 	This file is known as calculator02buggy.cpp
-
 	I have inserted 5 errors that should cause this not to compile
 	I have inserted 3 logic errors that should cause the program to give wrong results
-
 	First try to find an remove the bugs without looking in the book.
 	If that gets tedious, compare the code to that in the book (or posted source code)
-
 	Happy hunting!
-
 */
 
-#include "../std_lib_facilities.h"
+#include "../../Ch3/std_lib_facilities.h"
 
 //------------------------------------------------------------------------------
 
-class Token {           //hiányzik a "c" a class-ból
+class Token {         
 public:
     char kind;        // what kind of token
     double value;     // for numbers: a value 
@@ -62,7 +58,7 @@ void Token_stream::putback(Token t)
 
 //------------------------------------------------------------------------------
 
-Token Token_stream::get()   //rossz a referencia
+Token Token_stream::get()       
 {
     if (full) {       // do we already have a Token ready?
         // remove token from buffer
@@ -74,8 +70,8 @@ Token Token_stream::get()   //rossz a referencia
     cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
 
     switch (ch) {
-    case ';':    // for "print"
-    case 'q':    // for "quit"
+    case '=':    // for "print"
+    case 'x':    // for "quit"
     case '(': case ')': case '+': case '-': case '*': case '/': 
         return Token(ch);        // let each character represent itself
     case '.':
@@ -111,7 +107,7 @@ double primary()
         {    
             double d = expression();
             t = ts.get();
-            if (t.kind != ')') error("')' expected"); //"expected" után hiányzik "
+            if (t.kind != ')') error("')' expected");       
             return d;
         }
     case '8':            // we use '8' to represent a number
@@ -134,7 +130,7 @@ double term()
         case '*':
             left *= primary();
             t = ts.get();
-            break;              //hiányzik a break
+            break;            
         case '/':
             {    
                 double d = primary();
@@ -155,7 +151,7 @@ double term()
 // deal with + and -
 double expression()
 {
-    double left = term(;      // read and evaluate a Term
+    double left = term();      // read and evaluate a Term
     Token t = ts.get();        // get the next token from token stream
 
     while(true) {    
@@ -165,7 +161,7 @@ double expression()
             t = ts.get();
             break;
         case '-':
-            left -= term();    // evaluate Term and subtract | "+" helyett "-" kell
+            left -= term();    
             t = ts.get();
             break;
         default: 
@@ -177,37 +173,27 @@ double expression()
 
 //------------------------------------------------------------------------------
 
-int main()
-try
-{
-    cout <<"Welcome to our simple calculator.\n";
-    cout <<"Please enter expressions using floating-point numbers. \n";
-    cout <<"Tud összeadni, kivonni, osztani illetve szorozni.\n";
-    cout <<"Nyomjon '='-t a kiíráshoz, 'x'-et a kilépéshez.\n";
-    
-    
-    
-    while (cin) {
-        Token t = ts.get();
+int main(){
+    try
+    {
+        cout << "Welcome to our simple calculator.\n"
+             << "Please enter expressions using floating-point numbers.\n"
+             << "You can add, subract, divide, multiply!!\n"
+             << "End your expression with an '=' to print the current state, press 'x' to quit.\n";
 
-        if (t.kind == 'x') break; // 'q' for quit
-        if (t.kind == '=')        // ';' for "print now"
-            cout << "=" << val << '\n';
-        else
-            ts.putback(t);
-        val = expression();
+        while (cin) {
+            cout << "=" << expression() << '\n';
+        }
+        keep_window_open();
     }
-	keep_window_open();
+    catch (exception& e) {
+        cerr << "error: " << e.what() << '\n'; 
+        keep_window_open();
+        return 1;
+    }
+    catch (...) {
+        cerr << "Oops: unknown exception!\n"; 
+        keep_window_open();
+        return 2;
+    }
 }
-catch (exception& e) {
-    cerr << "error: " << e.what() << '\n'; 
-	keep_window_open();
-    return 1;
-}
-catch (...) {
-    cerr << "Oops: unknown exception!\n"; 
-	keep_window_open();
-    return 2;
-}
-
-//------------------------------------------------------------------------------
