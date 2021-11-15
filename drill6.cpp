@@ -33,6 +33,7 @@ public:
     Token_stream();   // make a Token_stream that reads from cin
     Token get();      // get a Token (get() is defined elsewhere)
     void putback(Token t);    // put a Token back
+	
 private:
     bool full;        // is there a Token in the buffer?
     Token buffer;     // here is where we keep a Token put back using putback()
@@ -41,6 +42,7 @@ private:
 //------------------------------------------------------------------------------
 
 // The constructor just sets full to indicate that the buffer is empty:
+
 Token_stream::Token_stream()
 :full(false), buffer(0)    // no Token in buffer
 {
@@ -67,7 +69,7 @@ Token Token_stream::get()
     } 
 
     char ch;
-    cin >> ch;    // note that >> skips whitespace (space, newline, tab, etc.)
+    cin >> ch;    // note that >> skips whitespace (space, newline, tab,...)
 
     switch (ch) {
     case '=':    // for "print"
@@ -117,6 +119,7 @@ double primary()
     }
 }
 
+
 //------------------------------------------------------------------------------
 
 // deal with *, /, and %
@@ -145,6 +148,7 @@ double term()
         }
     }
 }
+
 
 //------------------------------------------------------------------------------
 
@@ -178,8 +182,8 @@ int main(){
     {
         cout << "Welcome to our simple calculator.\n"
              << "Please enter expressions using floating-point numbers.\n"
-             << "You can add, subract, divide, multiply!!\n"
-             << "End your expression with an '=' to print the current state, press 'x' to quit.\n";
+             << "With the calculator you can add, subract, divide and also multiply.\n"
+             << "End your expression with an '=' if you want to print the current state, press 'x' if you want to quit.\n";
 
         while (cin) {
             cout << "=" << expression() << '\n';
@@ -192,8 +196,9 @@ int main(){
         return 1;
     }
     catch (...) {
-        cerr << "Oops: unknown exception!\n"; 
+        cerr << "Sorry, unknown exception!\n"; 
         keep_window_open();
         return 2;
     }
 }
+
