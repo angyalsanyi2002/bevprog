@@ -12,7 +12,7 @@
 	Happy hunting!
 */
 
-#include "../../Ch3/std_lib_facilities.h"
+#include "std_lib_facilities.h"
 
 //------------------------------------------------------------------------------
 
