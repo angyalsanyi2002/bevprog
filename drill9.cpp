@@ -1,3 +1,6 @@
+
+//Ezt a drillt passzolni szeretném.
+
 #include "std_lib_facilities.h"
 
 struct Date {
