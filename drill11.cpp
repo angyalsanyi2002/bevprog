@@ -19,8 +19,9 @@ cout << dec << "decimal: " << age << '\t'<< oct << "octal: " << age << '\t' << h
 cin >> a >>oct >> b >> hex >> c >> d;                       //'a' változót decimal-ból hexadecimalba váltja, 'b'-t octal-ból hexa-ba, 'c'-t és 'd'-t hexa-ból hexa-ba.
 cout << a << '\t'<< b << '\t'<< c << '\t'<< d << '\n' ;
 
-cout << dec << defaultfloat << num << '\t'<< fixed << num << '\t'<< scientific << num << '\n';
-
+cout << dec << defaultfloat << num << '\t'<< fixed << num << '\t'<< scientific << num << '\n';                // a fixed adja vissza a legpontosabban,
+                                                                                                              // defaultfloat=normálalak +kerekítés( 5 számjegyre)
+                                                                                                              // scientific=normálalak +kerekítés( 6 számjegyre)
 
 cout << setw(10) << "Nagy" << " | " << "István" << " | " << setw(16) << "+36701234555" << " | " << setw(29) << "nagyistvan12@gmail.com\n"
      << setw(10) << "Lesi" << " | " << setw(8) << "László" << " | " << setw(16) << "+36701234544" << " | " << setw(30) << "lesi.lacika@gmail.com\n"
