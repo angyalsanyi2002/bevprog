@@ -6,9 +6,11 @@ using namespace std;
 
 int swap_v(int a, int b){
     int temp; temp = a, a=b; b=temp; 
+    return 0;
 }
 int swap_r(int &a, int &b){
     int temp; temp = a, a=b; b=temp; 
+    return 0;
 }
 /*
 int swap_cr(const int &a, const int &b){
